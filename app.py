@@ -3,6 +3,10 @@ import pandas as pd
 from datetime import date
 from order import Item, Order
 from db import get_all_orders, save_order
+from auth import *
+
+if not login():
+    st.stop()  
 
 st.set_page_config(page_title="Order Manager", layout="centered")
 st.title("📦 Order Management App")
