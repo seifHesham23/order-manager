@@ -151,3 +151,16 @@ def update_order(order):
         rows_to_delete = matching_indices[num_new:]
         for row_num in reversed(rows_to_delete):  # Delete bottom-up
             sheet.delete_rows(row_num)
+
+def delete_order_by_id(order_id):
+    ensure_headers()
+    records = sheet.get_all_values()
+    rows_to_delete = []
+
+    for i in range(1, len(records)):
+        row = records[i]
+        if row and row[0] == order_id:
+            rows_to_delete.append(i + 1)  # 1-based indexing
+
+    for row_index in reversed(rows_to_delete):  # Delete from bottom up
+        sheet.delete_rows(row_index)
